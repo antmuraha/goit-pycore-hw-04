@@ -33,7 +33,6 @@ def listing_files(result: ResultList, path=".", level=0):
     """
 
     directory = Path(path)
-    # print(directory.resolve(), directory.is_dir(), directory.exists())
     if level == 0 and not directory.exists():
         raise Exception(f"The directory {directory.resolve()} does not exist")
 
@@ -50,7 +49,6 @@ def listing_files(result: ResultList, path=".", level=0):
         return
 
     for item in directory.iterdir():
-        # print(item.is_dir(), item)
         is_dir = item.is_dir()
         result.append({
             "level": level,
@@ -59,8 +57,6 @@ def listing_files(result: ResultList, path=".", level=0):
         })
         if is_dir:
             listing_files(result, item.resolve(), level + 1)
-
-    # return directory.exists(), directory.is_dir(), directory.resolve(), result
 
 
 def format_result(result: ResultList, indent=DEFAULT_INDENT, dir_color=Fore.BLUE, file_color=Fore.GREEN):
